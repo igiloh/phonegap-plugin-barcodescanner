@@ -41,8 +41,8 @@ public final class CameraManager {
 
   private static final String TAG = CameraManager.class.getSimpleName();
 
-  private static final int MIN_FRAME_WIDTH = 540;
-  private static final int MIN_FRAME_HEIGHT = 960;
+  private static final int MIN_FRAME_WIDTH = 960;
+  private static final int MIN_FRAME_HEIGHT = 540;
   private static final int MAX_FRAME_WIDTH = 1000;
   private static final int MAX_FRAME_HEIGHT = 960;
 
