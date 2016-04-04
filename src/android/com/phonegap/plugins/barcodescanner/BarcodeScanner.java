@@ -177,7 +177,8 @@ public class BarcodeScanner extends CordovaPlugin {
                     byte[] dataBytes = intent.getByteArrayExtra("SCAN_RESULT_BYTE_SEGMENTS_0");
 
                     if (dataBytes == null){
-                        showResultInDialog("unable to get bytes - scan again");
+                        Log.e(LOG_TAG, "unable to get bytes - scan again");
+//                        showResultInDialog("unable to get bytes - scan again");
                         return;
 
                     }
