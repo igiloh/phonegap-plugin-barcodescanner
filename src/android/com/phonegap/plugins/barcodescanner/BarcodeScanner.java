@@ -15,6 +15,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
+import android.util.Base64;
 
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CallbackContext;
@@ -167,11 +168,23 @@ public class BarcodeScanner extends CordovaPlugin {
      */
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
         if (requestCode == REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 JSONObject obj = new JSONObject();
                 try {
-                    obj.put(TEXT, intent.getStringExtra("SCAN_RESULT"));
+
+                    byte[] dataBytes = intent.getByteArrayExtra("SCAN_RESULT_BYTE_SEGMENTS_0");
+
+                    if (dataBytes == null){
+                        showResultInDialog("unable to get bytes - scan again");
+                        return;
+
+                    }
+                    String resultAsBase64 = Base64.encodeToString(dataBytes, Base64.DEFAULT);
+
+                    //obj.put(TEXT, intent.getStringExtra("SCAN_RESULT"));
+                    obj.put(TEXT, resultAsBase64);
                     obj.put(FORMAT, intent.getStringExtra("SCAN_RESULT_FORMAT"));
                     obj.put(CANCELLED, false);
                 } catch (JSONException e) {
